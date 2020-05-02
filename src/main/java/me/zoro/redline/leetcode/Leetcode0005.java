@@ -42,6 +42,51 @@ public class Leetcode0005 {
 	}
 
 	/**
+	 * 中心扩散法
+	 *
+	 * @param s
+	 * @return
+	 */
+	public String longestPalingrome_2(String s) {
+		if (s == null || s.length() < 2) {
+			return s;
+		}
+		int left;
+		int right;
+		int maxLen = 1;
+		int start = 0;
+		int curLen = 1;
+		int strLen = s.length();
+		for (int i = 0; i < s.length(); i++) {
+			curLen = 1;
+			left = i - 1;
+			right = i + 1;
+			//向左寻找和当前字符不一样的，如果一样那这部分一定能作为回文，比如奇数的 aaa, 偶数的 aaaa
+			while (left >= 0 && s.charAt(i) == s.charAt(left)) {
+				left--;
+				curLen++;
+			}
+			// 向右寻找和当前字符不一样的
+			while (right < strLen && s.charAt(i) == s.charAt(right)) {
+				right++;
+				curLen++;
+			}
+			// 左右对比扩散
+			while (left >= 0 && right < strLen && s.charAt(left) == s.charAt(right)) {
+				left--;
+				right++;
+				curLen += 2;
+			}
+			if (curLen > maxLen) {
+				// 加1是因为真正开始已经进行一次移动，每次比较符合又进行一次移动，最终的left其实是第一个不符合的(或者-1)
+				start = left + 1;
+				maxLen = curLen;
+			}
+		}
+		return s.substring(start, start + maxLen);
+	}
+
+	/**
 	 * 递归判断一个字符串是否是回文字符串
 	 *
 	 * @param s
