@@ -12,8 +12,32 @@ import java.util.Stack;
  */
 public class Leetcode0032 {
 
+	public int longestValidParentheses_0(String s) {
+		if (s == null || s.length() < 2) {
+			return 0;
+		}
+		Stack<Integer> stack = new Stack<>();
+		// 添加一个初始-1的索引，如果整个栈被弹出为空，说明是多处一个 ) 的子串，不符合，因此可以把当前这个位置入栈，做为一个新传起始点之前，如开始的-1
+		// 如果弹出后非空,说明这一段是符合的，计算最新串的长度和此前最长，两者比较
+		stack.push(-1);
+		int max = 0;
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) == '(') {
+				stack.push(i);
+			} else {
+				stack.pop();
+				if (stack.isEmpty()) {
+					stack.push(i);
+				} else {
+					max = Math.max(max, i - stack.peek());
+				}
+			}
+		}
+		return max;
+	}
+
 	/**
-	 * 利用数据记录所有匹配的括号，然后找出最大连续的括号。
+	 * 利用数组记录所有匹配的括号，然后找出最大连续的括号。
 	 * 对于这种括号匹配，大概率会用到栈匹配每组，还要关注是有记录匹配下的值
 	 *
 	 * @param s
