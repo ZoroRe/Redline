@@ -12,7 +12,33 @@ import java.util.List;
 @Slf4j
 public class Leetcode0236 {
 
+	/**
+	 * 本来还以为用递归才是影响性能，看来我进入误区了，反而这样递归效率很高
+	 * @param root
+	 * @param p
+	 * @param q
+	 * @return
+	 */
 	public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+		if (root == null) {
+			return root;
+		}
+		if (root.val == p.val || root.val == q.val) {
+			return root;
+		}
+		// 左右都找到，说明 p q 分别在对应子树的左右子树，因此公共祖先就是当前root
+		TreeNode left = lowestCommonAncestor(root.left, p, q);
+		TreeNode right = lowestCommonAncestor(root.right, p, q);
+		if (left != null && right != null) {
+			return root;
+		}
+		if (left != null) {
+			return left;
+		}
+		return right;
+	}
+
+	public TreeNode lowestCommonAncestor0(TreeNode root, TreeNode p, TreeNode q) {
 		int indexP = -1;
 		int indexQ = -1;
 		List<TreeNode> list = new ArrayList<>();
@@ -109,7 +135,7 @@ public class Leetcode0236 {
 		root.left.right.right = new TreeNode(4);
 
 		Leetcode0236 solution = new Leetcode0236();
-		TreeNode result = solution.lowestCommonAncestor(root, root.left, root.right);
+		TreeNode result = solution.lowestCommonAncestor0(root, root.left, root.right);
 		log.info("result node is: {}", result);
 
 	}
