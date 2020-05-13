@@ -1,6 +1,7 @@
 package me.zoro.redline.leetcode;
 
 import lombok.extern.slf4j.Slf4j;
+import me.zoro.redline.leetcode.entity.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,21 +108,6 @@ public class Leetcode0236 {
 		return list.get(indexQ);
 	}
 
-	static class TreeNode {
-		int val;
-		TreeNode left;
-		TreeNode right;
-
-		TreeNode(int x) {
-			val = x;
-		}
-
-		@Override
-		public String toString() {
-			return "TreeNode#{val=" + val + "}";
-		}
-
-	}
 
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(3);

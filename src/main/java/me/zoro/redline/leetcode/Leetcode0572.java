@@ -1,5 +1,7 @@
 package me.zoro.redline.leetcode;
 
+import me.zoro.redline.leetcode.entity.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,25 +52,4 @@ public class Leetcode0572 {
 		return isSame(s.left, t.left) && isSame(s.right, t.right);
 	}
 
-	/**
-	 * 树节点
-	 */
-	static class TreeNode {
-		int val;
-		TreeNode left;
-		TreeNode right;
-
-		TreeNode() {
-		}
-
-		TreeNode(int val) {
-			this.val = val;
-		}
-
-		TreeNode(int val, TreeNode left, TreeNode right) {
-			this.val = val;
-			this.left = left;
-			this.right = right;
-		}
-	}
 }
